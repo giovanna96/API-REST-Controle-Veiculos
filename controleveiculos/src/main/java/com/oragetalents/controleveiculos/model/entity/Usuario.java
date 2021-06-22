@@ -1,12 +1,14 @@
 package com.oragetalents.controleveiculos.model.entity;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.sun.istack.NotNull;
@@ -36,6 +38,9 @@ public class Usuario {
 	
 	@Column(name="data_nascimento")
 	private Date dataNascimento;
+	
+	@OneToMany
+	private Set<Veiculo> veiculos;
 
 	public Long getId() {
 		return id;
@@ -75,6 +80,14 @@ public class Usuario {
 
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
+	}
+
+	public Set<Veiculo> getVeiculos() {
+		return veiculos;
+	}
+
+	public void setVeiculos(Set<Veiculo> veiculos) {
+		this.veiculos = veiculos;
 	}
 
 	@Override
