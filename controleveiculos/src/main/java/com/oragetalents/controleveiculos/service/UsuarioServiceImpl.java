@@ -1,9 +1,12 @@
 package com.oragetalents.controleveiculos.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.oragetalents.controleveiculos.exception.RegistroNaoEncontradoException;
 import com.oragetalents.controleveiculos.exception.RegraNegocioException;
 import com.oragetalents.controleveiculos.model.entity.Usuario;
 import com.oragetalents.controleveiculos.model.repository.UsuarioRepository;
@@ -37,6 +40,14 @@ public class UsuarioServiceImpl implements UsuarioService{
 	public void validarCpf(String cpf) {
 		if(repository.existsByCpf(cpf))
 			throw new RegraNegocioException("Já existe um usuário cadatrado para o cpf informado");
+	}
+	
+	@Override
+	public Usuario findById(Long id) {
+		if(repository.findById(id).isPresent())
+			return repository.findById(id).get();
+		else
+			throw new RegistroNaoEncontradoException("Usuário não cadastrado na base de dados");
 	}
 
 }

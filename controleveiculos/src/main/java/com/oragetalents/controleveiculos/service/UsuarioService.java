@@ -9,4 +9,6 @@ public interface UsuarioService {
 	void validarEmail(String email);
 	
 	void validarCpf(String cpf);
+	
+	Usuario findById(Long id);
 }
