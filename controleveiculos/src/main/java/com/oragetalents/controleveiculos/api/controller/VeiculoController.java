@@ -31,7 +31,7 @@ public class VeiculoController {
 	@PostMapping
 	public ResponseEntity salvar(@RequestBody VeiculoDTO dto) { 
 		Usuario usuario = usuarioService.findById(dto.getUsuarioId());
-		Veiculo veiculo = new Veiculo(dto.getMarca(),dto.getModelo(),dto.getAno(),new BigDecimal(dto.getValor()),usuario);
+		Veiculo veiculo = new Veiculo(dto.getMarca(),dto.getModelo(),dto.getAno(),usuario);
 		try {
 			service.salvarVeiculo(veiculo);
 			return new ResponseEntity(veiculo, HttpStatus.CREATED);

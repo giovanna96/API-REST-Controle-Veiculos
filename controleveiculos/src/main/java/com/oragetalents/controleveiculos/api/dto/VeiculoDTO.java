@@ -10,9 +10,7 @@ public class VeiculoDTO {
 	private String modelo;
 	
 	private Integer ano;
-	
-	private String valor;
-	
+		
 	
 
 	public Long getUsuarioId() {
@@ -47,13 +45,7 @@ public class VeiculoDTO {
 		this.ano = ano;
 	}
 
-	public String getValor() {
-		return valor;
-	}
 
-	public void setValor(String valor) {
-		this.valor = valor;
-	}
 
 	@Override
 	public int hashCode() {
@@ -63,7 +55,6 @@ public class VeiculoDTO {
 		result = prime * result + ((marca == null) ? 0 : marca.hashCode());
 		result = prime * result + ((modelo == null) ? 0 : modelo.hashCode());
 		result = prime * result + ((usuarioId == null) ? 0 : usuarioId.hashCode());
-		result = prime * result + ((valor == null) ? 0 : valor.hashCode());
 		return result;
 	}
 
@@ -96,11 +87,7 @@ public class VeiculoDTO {
 				return false;
 		} else if (!usuarioId.equals(other.usuarioId))
 			return false;
-		if (valor == null) {
-			if (other.valor != null)
-				return false;
-		} else if (!valor.equals(other.valor))
-			return false;
+
 		return true;
 	}
 	

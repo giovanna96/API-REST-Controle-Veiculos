@@ -2,7 +2,7 @@ package com.oragetalents.controleveiculos.fipe;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class VeiculoModelo {
+public class VeiculoAno {
 	@JsonProperty("nome")
 	private String nome;
 	

@@ -36,7 +36,7 @@ public class Veiculo {
 	private Integer ano;
 	
 	@Column(name="valor")
-	private BigDecimal valor;
+	private String valor;
 	
 	@ManyToOne
 	@JoinColumn(name="id_usuario",nullable=false)
@@ -47,12 +47,11 @@ public class Veiculo {
 	
 	
 
-	public Veiculo(String marca, String modelo, Integer ano, BigDecimal valor, Usuario usuario) {
+	public Veiculo(String marca, String modelo, Integer ano, Usuario usuario) {
 		super();
 		this.marca = marca;
 		this.modelo = modelo;
 		this.ano = ano;
-		this.valor = valor;
 		this.usuario = usuario;
 	}
 
@@ -88,11 +87,11 @@ public class Veiculo {
 		this.ano = ano;
 	}
 
-	public BigDecimal getValor() {
+	public String getValor() {
 		return valor;
 	}
 
-	public void setValor(BigDecimal valor) {
+	public void setValor(String valor) {
 		this.valor = valor;
 	}
 
