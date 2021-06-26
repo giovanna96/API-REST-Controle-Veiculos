@@ -44,6 +44,17 @@ public class Veiculo {
 	
 	@Transient
 	private boolean rodizioAtivo;
+	
+	
+
+	public Veiculo(String marca, String modelo, Integer ano, BigDecimal valor, Usuario usuario) {
+		super();
+		this.marca = marca;
+		this.modelo = modelo;
+		this.ano = ano;
+		this.valor = valor;
+		this.usuario = usuario;
+	}
 
 	public Long getId() {
 		return id;
