@@ -45,7 +45,14 @@ public class Veiculo {
 	@Transient
 	private boolean rodizioAtivo;
 	
+	@Transient
+	private String diaRodizio;
 	
+	
+
+	public Veiculo() {
+
+	}
 
 	public Veiculo(String marca, String modelo, Integer ano, Usuario usuario) {
 		super();
@@ -111,11 +118,20 @@ public class Veiculo {
 		this.rodizioAtivo = rodizioAtivo;
 	}
 
+	public String getDiaRodizio() {
+		return diaRodizio;
+	}
+
+	public void setDiaRodizio(String diaRodizio) {
+		this.diaRodizio = diaRodizio;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((ano == null) ? 0 : ano.hashCode());
+		result = prime * result + ((diaRodizio == null) ? 0 : diaRodizio.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((marca == null) ? 0 : marca.hashCode());
 		result = prime * result + ((modelo == null) ? 0 : modelo.hashCode());
@@ -138,6 +154,11 @@ public class Veiculo {
 			if (other.ano != null)
 				return false;
 		} else if (!ano.equals(other.ano))
+			return false;
+		if (diaRodizio == null) {
+			if (other.diaRodizio != null)
+				return false;
+		} else if (!diaRodizio.equals(other.diaRodizio))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -168,6 +189,8 @@ public class Veiculo {
 			return false;
 		return true;
 	}
+
+	
 	
 	
 	

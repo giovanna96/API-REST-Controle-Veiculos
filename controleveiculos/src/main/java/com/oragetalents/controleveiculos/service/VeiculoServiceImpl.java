@@ -1,9 +1,9 @@
 package com.oragetalents.controleveiculos.service;
 
-import java.math.BigDecimal;
+import java.text.DateFormatSymbols;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
+import java.util.Calendar;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +16,7 @@ import com.oragetalents.controleveiculos.fipe.VeiculoAno;
 import com.oragetalents.controleveiculos.fipe.VeiculoFipe;
 import com.oragetalents.controleveiculos.fipe.VeiculoMarca;
 import com.oragetalents.controleveiculos.fipe.VeiculoModelo;
+import com.oragetalents.controleveiculos.model.entity.Usuario;
 import com.oragetalents.controleveiculos.model.entity.Veiculo;
 import com.oragetalents.controleveiculos.model.repository.VeiculoRepository;
 
@@ -73,12 +74,6 @@ public class VeiculoServiceImpl implements VeiculoService{
 	}
 
 	@Override
-	public BigDecimal buscaValor(Veiculo veiculo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public VeiculoFipe buscaFipe(String codModelo, String codMarca, String ano) {
 		ResponseEntity<VeiculoFipe> responseEntity = this.restTemplate.getForEntity("https://parallelum.com.br/fipe/api/v1/carros/marcas/"+codMarca+"/modelos/"+codModelo+"/anos/"+ano, VeiculoFipe.class);
 		VeiculoFipe veiculo = responseEntity.getBody();
@@ -105,6 +100,47 @@ public class VeiculoServiceImpl implements VeiculoService{
 		ResponseEntity<VeiculoAno[]> responseEntity =this.restTemplate.getForEntity("https://parallelum.com.br/fipe/api/v1/carros/marcas/"+codMarca+"/modelos/"+codModelo+"/anos", VeiculoAno[].class);
 		VeiculoAno[] veiculoAnos = responseEntity.getBody();
 		return veiculoAnos;
+	}
+
+	@Override
+	public Set<Veiculo> buscaVeiculosUsuario(Usuario usuario) {
+		Set<Veiculo> veiculos = repository.findAllVeiculosOfUsuario(usuario.getId());
+		for (Veiculo veiculo : veiculos) {
+			int numeroAno = veiculo.getAno() % 10;
+			switch (numeroAno) {
+			case 0 :
+			case 1:
+				veiculo.setDiaRodizio("Segunda-feira");		
+				break;
+			
+			case 2:
+			case 3:
+				veiculo.setDiaRodizio("Terça-feira");
+				break;
+				
+			case 4:
+			case 5:
+				veiculo.setDiaRodizio("Quarta-feira");
+				break;
+				
+			case 6:
+			case 7:
+				veiculo.setDiaRodizio("Quinta-feira");
+				break;
+				
+			case 8:
+			case 9:
+				veiculo.setDiaRodizio("Sexta-feira");
+				break;
+			}
+
+			String diaDaSemana = new DateFormatSymbols().getWeekdays()[Calendar.getInstance().get(Calendar.DAY_OF_WEEK)];
+			if(veiculo.getDiaRodizio().equals(diaDaSemana))
+				veiculo.setRodizioAtivo(true);
+			else
+				veiculo.setRodizioAtivo(false);
+		}
+		return veiculos;
 	}
 	
 	

@@ -1,7 +1,5 @@
 package com.oragetalents.controleveiculos.model.repository;
 
-import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.oragetalents.controleveiculos.model.entity.Usuario;
@@ -12,3 +10,5 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 	boolean existsByCpf(String cpf);
 	
 }
+
+
